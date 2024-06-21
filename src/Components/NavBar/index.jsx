@@ -15,9 +15,10 @@ const NavBar = () => {
   }
   return (
     <div className='flex justify-between items-center'>
-      <h1 className=' text-2xl sm:text-3xl !text-white font-[510]  tracking-5 '>TODO</h1>
-      <div className="" >
-        {themeMode === 'light' ? <Icon iconName={'ion:moon-sharp'} className={'!w-7 !h-7 mr-1'} onClick={handleThemeChange}/> : <Icon iconName={'clarity:sun-solid'} className={'!w-7 !h-7 mr-1'} onClick={handleThemeChange}/>}
+
+      <h1 className=' text-2xl sm:text-3xl !text-white font-[510]  tracking-5 ' >TODO</h1>
+      <div className="" onClick={handleThemeChange}>
+        {themeMode === 'light' ? <Icon iconName={'ion:moon-sharp'} className={'!w-7 !h-7 mr-1'}/> : <Icon iconName={'ph:sun-bold'} className={'!w-7 !h-7 mr-1'} />}
       </div>
     </div>
 
