@@ -8,7 +8,7 @@ const AddToDo = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (inputVal != '') {
+        if (inputVal.trim() !== '' ) {
             addTodo({
                 todoTitle: inputVal,
                 complete: false

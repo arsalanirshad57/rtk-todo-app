@@ -11,6 +11,7 @@ export const TodoContext = createContext({
     onDelte: () => { },
     onEdit: () => { },
     addTodo: () => { },
+    toogleComplete: () => { },
 })
 
 export const TodoProvider = TodoContext.Provider

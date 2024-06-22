@@ -14,7 +14,7 @@ function App() {
   // Sates and Variables
   const [todos, setTodos] = useState([])
   const [themeMode, setThemeMode] = useState('light')
-
+  console.log(todos, 'todos');
   // Functions for theme switcher
 
   const lightTheme = () => {
@@ -32,7 +32,7 @@ function App() {
       if (prevVal?.some(itm => itm?.todoTitle == todo?.todoTitle)) {
         return [...prevVal]
       } else {
-        return [{ 
+        return [{
           id: Math.round(Math.random() * 1000),
           ...todo
         }, ...prevVal]
@@ -54,15 +54,21 @@ function App() {
     if (todos?.some(_ => _?.id == id)) {
       setTodos([{
         id: id,
-        ...todo,
+        ...todo, 
         complete: false,
       }, ...todos])
+      
       setTodos((eachVal) => {
         if (eachVal?.map((_) => _?.id == id)) {
           return eachVal?.filter(item => item?.todoTitle !== todoTitle)
         }
       })
     }
+  }
+
+  const toogleComplete = (id, todo) => {
+    setTodos((prevItem) => prevItem?.map(item => item?.id === id ? {...item, ...todo }  : item )
+    )
   }
 
   useEffect(() => {
@@ -73,7 +79,7 @@ function App() {
 
   return (
     <ThemeProvider value={{ themeMode, lightTheme, darkTheme }}>
-      <TodoProvider value={{ todos, onDelete, addTodo, onEdit }}>
+      <TodoProvider value={{ todos, onDelete, addTodo, onEdit, toogleComplete }}>
         <div className="relative flex h-screen dark:text-white text-gray-600 dark:bg-black bg-white">
           <BgImage />
           <div className=' flex flex-col gap-8 w-11/12 sm:w-10/12 md:w-600 h-96 border-black z-50 mt-36 mx-auto '>
