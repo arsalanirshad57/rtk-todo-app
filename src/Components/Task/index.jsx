@@ -4,8 +4,7 @@ import { useTodo } from '../../context/TodoContext'
 
 
 const Task = ({ todo }) => {
-  const [editVal, setEditVal] = useState(todo?.todoTitle)
-  // const [completedIcon, setCompletedIcon] = useState(false)
+  const [editVal, setEditVal] = useState(todo?.todoTitle )
   const [edit, setEdit] = useState(false)
   const { onDelete, onEdit, toogleComplete } = useTodo()
 
@@ -18,8 +17,8 @@ const Task = ({ todo }) => {
   }
 
   const handleEditSubmit = (id) => {
-    onEdit(todo?.todoTitle, id, {
-      todoTitle: editVal,
+    onEdit(id, {
+      todoTitle: editVal == '' ? todo?.todoTitle : editVal,
     })
     setEdit(false)
   }
@@ -44,7 +43,7 @@ const Task = ({ todo }) => {
       {/* TodoTitle  */}
       {edit ? (
         <form onSubmit={() => handleEditSubmit(todo?.id)} className='w-full'>
-          <input type="text" className=' w-full border border-gray-300 dark:border-gray-700 pl-1 bg-transparent outline-none rounded py-1 text-sm ' value={editVal} onChange={(e) => setEditVal(e.target.value)} />
+          <input type="text" className=' w-full border border-gray-300 dark:border-gray-700 pl-1 bg-transparent outline-none rounded py-1 text-sm ' value={editVal} onChange={(e) => setEditVal(e.target.value )} />
         </form>
       ) : (
         <p className={`w-full text-sm py-1 grow border-gray-300 dark:text-gray-300 text-gray-600 truncate ${todo?.completed ? 'line-through' : ''}`}>{todo?.todoTitle}</p>

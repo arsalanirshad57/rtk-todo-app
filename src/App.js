@@ -14,8 +14,8 @@ function App() {
   // Sates and Variables
   const [todos, setTodos] = useState([])
   const [themeMode, setThemeMode] = useState('light')
-  console.log(todos, 'todos');
   // Functions for theme switcher
+  console.log(todos, 'todos');
 
   const lightTheme = () => {
     setThemeMode('light')
@@ -50,31 +50,31 @@ function App() {
     })
   }
 
-  const onEdit = (todoTitle, id, todo) => {
-    if (todos?.some(_ => _?.id == id)) {
-      setTodos([{
-        id: id,
-        ...todo, 
-        complete: false,
-      }, ...todos])
-      
-      setTodos((eachVal) => {
-        if (eachVal?.map((_) => _?.id == id)) {
-          return eachVal?.filter(item => item?.todoTitle !== todoTitle)
-        }
-      })
-    }
+  const onEdit = (id, todo) => {
+    setTodos((prev) => prev?.map(prevItem => prevItem?.id === id ? { ...prevItem, ...todo } : prevItem))
   }
 
   const toogleComplete = (id, todo) => {
-    setTodos((prevItem) => prevItem?.map(item => item?.id === id ? {...item, ...todo }  : item )
+    setTodos((prevItem) => prevItem?.map(item => item?.id === id ? { ...item, ...todo } : item)
     )
   }
+  // UseEffects 
 
   useEffect(() => {
     document.querySelector('html').classList.remove('light', 'dark')
     document.querySelector('html').classList.add(themeMode)
   }, [themeMode]);
+
+  useEffect(() => {
+    const ParseTodos = JSON.parse(localStorage.getItem('todos'))
+    if (ParseTodos && ParseTodos?.length > 0) {
+      setTodos(ParseTodos)
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos]);
 
 
   return (
