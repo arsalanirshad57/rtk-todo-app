@@ -1,24 +1,11 @@
 import React, { useState } from 'react'
 import Icon from '../Icons'
-import { useTodo } from '../../context/TodoContext'
 
 const AddToDo = () => {
     const [inputVal, setInputVal] = useState('')
-    const { addTodo } = useTodo()
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (inputVal.trim() !== '' ) {
-            addTodo({
-                todoTitle: inputVal,
-                complete: false
-            })
-        }
-        setInputVal('') 
-    }
 
     return (
-        <form onSubmit={handleSubmit} className='flex justify-between items-center gap-4 dark:bg-slate-800  bg-white rounded-sm px-3 py-3.5'>
+        <form className='flex justify-between items-center gap-4 dark:bg-slate-800  bg-white rounded-sm px-3 py-3.5'>
 
             <Icon
                 iconName="iconoir:circle"
