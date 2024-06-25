@@ -1,11 +1,24 @@
 import React, { useState } from 'react'
+
+import { useDispatch } from 'react-redux'
+import { addTodo } from '../../redux/todo-slice'
+
 import Icon from '../Icons'
 
 const AddToDo = () => {
     const [inputVal, setInputVal] = useState('')
 
+    const dispatch = useDispatch()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        dispatch(addTodo(inputVal))
+        setInputVal('')
+    }
+
+
     return (
-        <form className='flex justify-between items-center gap-4 dark:bg-slate-800  bg-white rounded-sm px-3 py-3.5'>
+        <form onSubmit={handleSubmit} className='flex justify-between items-center gap-4 dark:bg-slate-800  bg-white rounded-sm px-3 py-3.5'>
 
             <Icon
                 iconName="iconoir:circle"
