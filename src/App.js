@@ -11,10 +11,6 @@ function App() {
   const allTodos = useSelector(state => state.todos) 
   console.log(allTodos, 'todos'); 
 
-
-  useEffect(() => {
-    JSON.stringify(localStorage.getItem('todos'))
-  })
   return (
 
     <div className="relative flex h-screen dark:text-white text-gray-600 dark:bg-black bg-white">
